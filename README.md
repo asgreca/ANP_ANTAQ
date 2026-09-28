@@ -103,21 +103,32 @@ python main.py --modo inlabs
 
 ## 5. Como Funciona a Extração sem Playwright (Servidores Corporativos)
 
-Muitos servidores corporativos barram navegadores automatizados como Chromium ou Playwright por restrições de segurança ou falta de bibliotecas visuais (X11).
+Muitos servidores corporativos barram navegadores automatizados como Chromium ou Playwright por restrições de segurança de rede, políticas de sandbox ou ausência de bibliotecas visuais (X11).
 
-Para contornar isso de forma nativa e sem quebras:
-1. Criamos o módulo `src/dou_inlabs.py`, que utiliza o serviço oficial de dados abertos **INLABS** da Imprensa Nacional ([inlabs.in.gov.br](https://inlabs.in.gov.br)).
-2. A Imprensa Nacional disponibiliza diariamente um pacote `.zip` com todas as matérias da Seção 1 em **XML estruturado**.
-3. O script baixa o arquivo, descompacta em memória, filtra com XPath/XML os atos com tags de ANP e ANTAQ e salva os JSONs.
-4. **Zero Chromium, zero Playwright, zero emulação de tela**. Apenas Python padrão e a biblioteca `requests`.
+Para viabilizar a execução nesses ambientes de forma nativa e sem necessidade de navegadores, implementamos a integração direta com o **INLABS da Imprensa Nacional**.
 
-Para habilitar este modo, basta criar uma conta gratuita no [INLABS](https://inlabs.in.gov.br) e preencher no arquivo `.env`:
-```bash
-cp .env.example .env
-# Edite com seu login e senha:
-INLABS_EMAIL=seu_email@empresa.com.br
-INLABS_PASSWORD=sua_senha
-```
+### O que é o INLABS e o que é esta credencial?
+- **O que é o INLABS**: É a plataforma oficial de **Dados Abertos** da Imprensa Nacional ([inlabs.in.gov.br](https://inlabs.in.gov.br)), órgão vinculado à Casa Civil da Presidência da República. Desde 1º de janeiro de 2020, a Imprensa Nacional disponibiliza por meio do INLABS todas as edições completas do Diário Oficial da União em formatos abertos (XML estruturado e PDF).
+- **O que é a credencial**: Não se trata de uma chave de API paga nem de um token restrito. É uma **conta de usuário comum e 100% gratuita** (composta por e-mail e senha) criada diretamente no portal da Imprensa Nacional. A autenticação serve apenas para controle de tráfego e prevenção de sobrecarga nos servidores públicos da União.
+- **Vantagem técnica**: Ao usar o INLABS, o script baixa o arquivo `.zip` da Seção 1 (contendo todos os atos do dia em XML individual), descompacta em memória e filtra os atos da ANP e da ANTAQ via XPath. Isso consome pouquíssima memória e roda com apenas Python e a biblioteca `requests`, sem nenhuma dependência gráfica.
+
+### Passo a Passo para Obter o Acesso ao INLABS (Gratuito)
+
+1. **Acessar o portal**: Entre na página oficial do [INLABS](https://inlabs.in.gov.br).
+2. **Criar a conta**: Na tela de autenticação, localize e clique no botão **Cadastrar** (ou acesse a área de cadastro).
+3. **Preencher os dados**: Informe seu nome, e-mail (recomendável utilizar o e-mail corporativo ou institucional) e crie uma senha segura.
+4. **Confirmar o cadastro**: Caso receba uma mensagem de validação no e-mail informado, confirme a ativação da conta.
+5. **Configurar o projeto**: Na raiz da pasta do projeto, crie o arquivo `.env` a partir do modelo de exemplo:
+   ```bash
+   cp .env.example .env
+   ```
+6. **Preencher as credenciais**: Abra o arquivo `.env` recém-criado em um editor de texto e insira seu e-mail e senha cadastrados:
+   ```dotenv
+   INLABS_EMAIL=seu_email@empresa.com.br
+   INLABS_PASSWORD=sua_senha_do_inlabs
+   ```
+
+Uma vez configurado, o comando padrão `python main.py` detectará automaticamente as variáveis do `.env` e priorizará o download via XML oficial, sem acionar nenhum navegador.
 
 ---
 
