@@ -1,0 +1,5 @@
+# Dependencias opcionais para raspagem direta via navegador headless
+# Utilize apenas em ambientes onde Playwright e Chromium sejam permitidos pela seguranca
+-r requirements.txt
+playwright>=1.40.0
+playwright-stealth>=1.0.6
