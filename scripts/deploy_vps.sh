@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REMOTE_HOST="tcc-prod"
-REMOTE_DIR="~/dlcm-normas-anp-antaq"
+REMOTE_DIR="~/anp-antaq-normas"
 LOCAL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 echo "==> Sincronizando arquivos de código com o VPS ($REMOTE_HOST)..."

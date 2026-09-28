@@ -1,13 +1,13 @@
-# Extração e Monitoramento de Normas ANP e ANTAQ para o Assistente DLCM
+# Extração e Monitoramento de Normas ANP e ANTAQ
 
-Pipeline de dados automatizado para coleta, estruturação e monitoramento contínuo do arcabouço normativo da **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)** e da **Agência Nacional de Transportes Aquaviários (ANTAQ)**, desenvolvido para alimentar a base de conhecimento e análise de Inteligência Artificial do **Assistente DLCM**.
+Pipeline de dados automatizado para coleta, estruturação e monitoramento contínuo do arcabouço normativo da **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)** e da **Agência Nacional de Transportes Aquaviários (ANTAQ)**, desenvolvido para alimentar bases de conhecimento e sistemas de análise regulatória baseados em Inteligência Artificial.
 
 ---
 
 ## 1. O Problema e a Solução Técnica
 
 ### O Desafio Inicial
-A equipe de Regulatórios da DNL/DLCM precisava acessar o estoque de resoluções e normas da ANP e ANTAQ. A ideia inicial de solicitar à TI das duas agências o desenvolvimento de uma API sob demanda enfrentava dois grandes entraves:
+A necessidade de acessar o estoque e as atualizações de resoluções e normas da ANP e ANTAQ frequentemente se depara com a ideia de solicitar à TI das duas agências o desenvolvimento de uma API sob demanda, o que enfrenta dois grandes entraves:
 1. Os sistemas de consulta usados pelas agências (`leis.org` para ANP e `sophia.antaq.gov.br` para ANTAQ) são softwares privados terceirizados. As equipes de TI das autarquias não possuem a posse do código para construir APIs personalizadas.
 2. Ambos os portais possuem barreiras de segurança de rede (desafio de JavaScript / Cloudflare) que dificultam raspagens convencionais em servidores de dados.
 
@@ -123,7 +123,7 @@ INLABS_PASSWORD=sua_senha
 
 ## 6. Automação Diária no Servidor (Crontab)
 
-Para manter a base de dados do Assistente DLCM sempre atualizada sem intervenção humana:
+Para manter a base de dados do assistente regulatório sempre atualizada sem intervenção humana:
 
 1. Abra a tabela de tarefas do servidor:
    ```bash

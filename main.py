@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ponto de Entrada Único do Pipeline ANP e ANTAQ para o Assistente DLCM.
+Ponto de Entrada Único do Pipeline de Normas ANP e ANTAQ.
 
 Este script orquestra todas as etapas de ingestão de normas em um único comando:
 1. Leis-Base Federais: garante que as 7 leis federais do setor estejam baixadas e consolidadas.
@@ -35,7 +35,7 @@ from src.leis_base import executar_coleta_leis_base
 
 def exibir_cabecalho():
     print("=" * 65)
-    print(" PIPELINE DE NORMAS ANP E ANTAQ | ASSISTENTE DLCM")
+    print(" PIPELINE DE NORMAS ANP E ANTAQ | ASSISTENTE REGULATÓRIO")
     print(" Extração autônoma, estruturação em JSON/Markdown e monitoramento")
     print("=" * 65)
 
@@ -106,7 +106,7 @@ def executar_pipeline(data_alvo: str = None, forcar_leis: bool = False, modo: st
     print(f"-> Pasta dos Atos DOU:   {DOU_DIR.relative_to(DATA_DIR.parent)}/{data_formatada}/")
     print(f"-> Tempo de Execução:    {tempo_total:.1f} segundos")
     print("=" * 65)
-    print("Pipeline concluído. A base de dados está pronta para o Assistente DLCM.\n")
+    print("Pipeline concluído. A base de dados está pronta para o assistente regulatório.\n")
 
 
 if __name__ == "__main__":
